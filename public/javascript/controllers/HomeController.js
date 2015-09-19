@@ -3,9 +3,9 @@
 	angular.module('app')
 	.controller('HomeController', HomeController);
 
-	HomeController.$inject = [];
+	HomeController.$inject = ["SpotifyFactory"];
 
-	function HomeController() {
+	function HomeController(SF) {
 		var vm = this;
 		vm.title = 'Welcome to our App!';
 	}
