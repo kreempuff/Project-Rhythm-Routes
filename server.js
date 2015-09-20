@@ -14,7 +14,10 @@ require('./config/passport');
 
 //connection
 // process.env.LOCAL_MONGO
-mongoose.connect(process.env.MONGO_LAB_URI || 'mongodb://localhost/Rhythm_Routes');
+mongoose.connect(process.env.MONGO_LAB_URI || 'mongodb://localhost/Rhythm_Routes', function (err, result) {
+	if(err) console.log("Error Connecting to database");
+	else console.log("Succesful connection");	
+});
 app.set('views', path.join(__dirname, 'views'));
 //set the view engine that will render HTML from the server to the client
 app.engine('.html', require('ejs').renderFile);
