@@ -1,1 +1,26 @@
-<h1>{{user.registerTitle}}</h1>
+<md-input-container>
+  <label>Firstname</label>
+  <input ng-model="registerModal.user.firstname">
+</md-input-container>
+
+<md-input-container>
+  <label>Lastname</label>
+  <input ng-model="registerModal.user.lastname">
+</md-input-container>
+
+<md-input-container>
+  <label>Username</label>
+  <input ng-model="registerModal.user.username">
+</md-input-container>
+
+<md-input-container>
+  <label>Password</label>
+  <input type='password' ng-model="registerModal.user.password">
+</md-input-container>
+
+<md-input-container>
+  <label>Confirm Password</label>
+  <input type='password' ng-model="registerModal.user.confirmPass">
+</md-input-container>
+<md-button class="md-raised md-primary" ng-click='registerModal.ok()'>Register</md-button>
+<md-button class="md-raised md-accent" ng-click='registerModal.cancel()'>Cancel</md-button>

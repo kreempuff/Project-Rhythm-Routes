@@ -1,1 +1,16 @@
-<h1>{{user.loginTitle}}</h1>
+<h1>{{home.loginTitle}}</h1>
+<md-content layout="column">
+  <div flex="50">
+    <md-input-container>
+      <label>Username</label>
+      <input ng-model="loginModal.user.username">
+    </md-input-container>
+  </div>
+  <md-input-container>
+    <label>Password</label>
+    <input type="password" ng-model="loginModal.user.password">
+  </md-input-container>
+</div>
+</md-content>
+<md-button class="md-raised md-primary" ng-click="loginModal.ok()">OK</md-button>
+<md-button class="md-raised md-accent" ng-click="loginModal.cancel()">Cancel</md-button>
