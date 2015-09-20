@@ -1,5 +1,5 @@
 {
-  "name": "Rhythm Routes",
+  "name": "RhythmRoutes",
   "version": "0.0.0",
   "description": "An application for the Coder Camps FullStack JS course",
   "main": "server.js",
