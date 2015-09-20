@@ -18,11 +18,15 @@
           animation: true,
           templateUrl: "../../templates/login.html",
           //MODALINSTANCE CONTROLLER AS FUNCTION---------------------------------
-          controller: ["$modalInstance", function($modalInstance) {
+          controller: ["$modalInstance", "UserFactory", function($modalInstance, UF) {
             var loginModal = this;
 
             loginModal.ok = function() {
-              $modalInstance.close();
+              UF.loginUser().then(function(res) {
+                delete loginModal.user;
+                $modalInstance.close();
+
+              })
             }
 
             loginModal.cancel = function() {
@@ -48,12 +52,15 @@
         animation: true,
         templateUrl: "../../templates/edit_profile.html",
         controllerAs: "registerModal",
-        controller: ["$modalInstance", function($modalInstance) {
+        controller: ["$modalInstance", "UserFactory", function($modalInstance, UF) {
           var registerModal = this;
 
           registerModal.ok = function() {
-            console.log(registerModal.user);
-            $modalInstance.close();
+            UF.registerUser(registerModal.user).then(function(res) {
+              delete registerModal.user;
+              console.log(res);
+              $modalInstance.close();
+            })
           }
 
           registerModal.cancel = function() {

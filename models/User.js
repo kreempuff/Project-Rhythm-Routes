@@ -11,4 +11,8 @@ var UserSchema = new mongoose.Schema({
   age: Number
 })
 
+// UserSchema.methods.setPassword = function (password) {
+//   salt
+// }
+
 mongoose.model('User', UserSchema);
