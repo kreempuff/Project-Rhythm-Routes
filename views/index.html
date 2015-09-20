@@ -3,14 +3,34 @@
 <head>
 	<title>Theme Music with Spotify</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="angular-material/angular-material.css">
 	<link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="/css/site.css">
+	<script src="//connect.soundcloud.com/sdk-2.0.0.js"></script>
+<script>
+// initialize client with app credentials
+SC.initialize({
+  client_id: 'ae8de7472acfddb81cc0a03d52f8ab9f',
+  redirect_uri: 'localhost:3000'
+});
+
+// initiate auth popup
+SC.connect(function() {
+  SC.get('/me', function(me) {
+    alert('Hello, ' + me.username);
+  });
+});
+</script>
 </head>
 <body>
+
 	<div ui-view></div>
 	<!-- Ext Libs -->
 	<script src="angular/angular.min.js"></script>
 	<script src="angular-ui-router/release/angular-ui-router.min.js"></script>
+	<script src="angular-material/angular-material.js"></script>
+	<script src="angular-animate/angular-animate.js"></script>
+	<script src="angular-aria/angular-aria.js"></script>
 	<!-- Global Src -->
 	<script src="/javascript/app.js"></script>
 	<!-- Factories -->
@@ -18,5 +38,6 @@
 	<script src="/javascript/services/SpotifyFactory.js"></script>
 	<!-- Controllers -->
 	<script src="/javascript/controllers/HomeController.js"></script>
+	<script src="/javascript/controllers/RegLogController.js"></script>
 </body>
 </html>

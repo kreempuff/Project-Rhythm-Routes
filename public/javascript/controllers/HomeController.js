@@ -3,10 +3,10 @@
 	angular.module('app')
 	.controller('HomeController', HomeController);
 
-	HomeController.$inject = ["SpotifyFactory"];
+	HomeController.$inject = [];
 
-	function HomeController(SF) {
-		var vm = this;
-		vm.title = 'Welcome to our App!';
+	function HomeController() {
+		var home = this;
+		home.title = 'Welcome to our App!';
 	}
 })();
