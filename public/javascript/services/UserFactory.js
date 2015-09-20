@@ -10,10 +10,11 @@
 
     //USER LOGIN---------------------------------------------------------------
 
-    o.loginUser = function( /*user*/ ) {
+    o.loginUser = function(user) {
       var q = $q.defer();
-      $http.post("/api/v1/users/login" /*user*/ )
+      $http.post("/api/v1/users/login", user)
         .success(function(res) {
+          console.log(res);
           q.resolve();
         })
         .error(function(res) {

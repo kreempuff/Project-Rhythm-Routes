@@ -7,10 +7,14 @@ var mongoose = require('mongoose');
 // var passport = require('passport'); //passport below mongoose
 //Models
 require('./models/User');
+require('./models/Salts');
 //passport configuration
+require('./config/passport');
+
 
 //connection
-mongoose.connect("mongodb://localhost/Rhythm_Routes");
+// process.env.LOCAL_MONGO
+mongoose.connect(process.env.MONGO_LAB_URI || 'mongodb://localhost/Rhythm_Routes');
 app.set('views', path.join(__dirname, 'views'));
 //set the view engine that will render HTML from the server to the client
 app.engine('.html', require('ejs').renderFile);

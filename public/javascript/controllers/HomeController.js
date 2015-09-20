@@ -22,7 +22,7 @@
             var loginModal = this;
 
             loginModal.ok = function() {
-              UF.loginUser().then(function(res) {
+              UF.loginUser(loginModal.user).then(function(res) {
                 delete loginModal.user;
                 $modalInstance.close();
 
