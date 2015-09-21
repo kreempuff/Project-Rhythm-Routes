@@ -1,6 +1,5 @@
 var express = require('express');
-//May use just request module
-var request = require('request');
+var cookieParser = require('cookie-parser');
 var path = require('path');
 var bodyParser = require('body-parser');
 var app = express();
@@ -32,6 +31,10 @@ app.engine('.html', require('ejs').renderFile);
 //Allow for these directories to be usable on the client side
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/bower_components'));
+//For Spotify
+app.use(express.static(__dirname + '/public'))
+   .use(cookieParser());
+
 //we want to render html files
 app.set('view engine', 'html');
 app.set('view options', {
@@ -58,5 +61,7 @@ app.use("/api/v1/google-maps", GoogleMapsRoutes);
 
 var server = app.listen(port, function() {
 	var host = server.address().address;
+	var time = new Date().toLocaleString();
 	console.log('Example app listening at http://localhost:' + port);
+	console.log("Time started: " + time);
 });

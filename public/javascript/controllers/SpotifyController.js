@@ -6,7 +6,7 @@
 
     spotC.login = function () {
       SpotifyFactory.loginWithSpotify().then(function (res) {
-        console.log(res.web_auth_uri);
+        console.log("It returned");
       })
     }
   }
