@@ -10,6 +10,7 @@ var UserSchema = new mongoose.Schema({
   passwordHash: {type: String},
   email: {type: String, unique:true, lowercase: true},
   age: Number,
+  dateJoined: Date,
   saltRef: {type: mongoose.Schema.Types.ObjectId, ref: "Salts"}
 })
 

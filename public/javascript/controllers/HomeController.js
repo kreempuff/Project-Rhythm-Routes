@@ -38,10 +38,9 @@
           //END OF MODAL INSTANCE CONTROLLER---------------------------------------------
           size: "md",
         });
-
-        loginInstance.result.then(function() {
-          console.log("Modal closed");
-        })
+        //What to do after modal closes?
+        // loginInstance.result.then(function() {
+        // })
       }
       //END OF LOGIN MODAL INSTANCE----------------------------------------------------------------
 
@@ -58,7 +57,6 @@
           registerModal.ok = function() {
             UF.registerUser(registerModal.user).then(function(res) {
               delete registerModal.user;
-              console.log(res);
               $modalInstance.close();
             })
           }
@@ -72,7 +70,7 @@
       })
     }
 
-
+//END of Register Modal!!---------------------------------------------------------------------
 
 
 

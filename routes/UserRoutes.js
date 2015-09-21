@@ -9,18 +9,11 @@ var passport = require('passport');
 
 
 
-// router.post("/login", function(req, res) {
-//
-//   res.send();
-// });
-
-
-
-
 
 router.post('/register', function(req, res) {
   var newuser = new User(req.body);
   //Save user with passwordHash field blank
+  newuser.dateJoined = new Date();
   newuser.save(function(err, newuser) {
     if (err) console.log(err);
     if (err) return res.status(500).send({
