@@ -3,15 +3,14 @@
   angular.module('app')
     .controller('HomeController', HomeController);
 
-  HomeController.$inject = ["$modal"];
+  HomeController.$inject = ["$modal", "$rootScope", "UserFactory"];
 
-  function HomeController(modal, modalInstance, user) {
+  function HomeController(modal, $rootScope, UF) {
     var home = this;
     home.title = 'Welcome to Rhythm Routes!';
     home.loginTitle = "Login";
     home.registerTitle = "Register!";
-
-
+    home.user = $rootScope._user;
     //LOGIN MODAL-----------------------------------------------------
     home.loginStart = function() {
         var loginInstance = modal.open({
@@ -24,6 +23,7 @@
             loginModal.ok = function() {
               UF.loginUser(loginModal.user).then(function(res) {
                 delete loginModal.user;
+                home.user = $rootScope._user;
                 $modalInstance.close();
 
               })
@@ -70,8 +70,11 @@
       })
     }
 
-//END of Register Modal!!---------------------------------------------------------------------
-
+    //END of Register Modal!!---------------------------------------------------------------------
+    home.logout = function() {
+      UF.logout();
+      home.user = $rootScope._user
+    }
 
 
   }

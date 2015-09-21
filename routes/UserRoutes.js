@@ -7,6 +7,15 @@ var passport = require('passport');
 
 
 
+router.post('/login', function(req, res, next) {
+  passport.authenticate('local', function(err, user, info) { //-----NOT REACHING PASSPORT.JS 9.16 1:50am
+    if (err) return res.status(500).send(err);
+    if (!user) return res.status(400).send(info);
+    res.send({
+      token: user.generateJWT()
+    });
+  })(req, res, next);
+});
 
 
 
@@ -86,14 +95,6 @@ router.post('/register', function(req, res) {
 
 
 
-router.post('/login', function(req, res, next) {
-  passport.authenticate('local', function(err, user, info) { //-----NOT REACHING PASSPORT.JS 9.16 1:50am
-    if (!user) return res.status(400).send(info);
-    res.send({
-      token: user.generateJWT()
-    });
-  })(req, res, next);
-});
 
 
 

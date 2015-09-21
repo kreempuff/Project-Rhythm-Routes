@@ -1,4 +1,6 @@
 var express = require('express');
+//May use just request module
+var request = require('request');
 var path = require('path');
 var bodyParser = require('body-parser');
 var app = express();
@@ -13,12 +15,17 @@ require('./config/passport');
 
 
 //connection
-
-var dbUri = process.env.MONGOLAB_URI || 'mongodb://localhost/Rhythm_Routes';
+var dbUri = process.env.LOCAL_MONGO || process.env.MONGOLAB_URI || "mongodb://localhost/Rhythm_Routes";
 mongoose.connect(dbUri, function (err, result) {
 	if(err) console.log("Error Connecting to database: " + dbUri + ". Error: " + err);
 	else console.log("Succesful connection to: " + dbUri);
 });
+//TESTING REQUEST-------------------------------------------------
+
+
+
+
+//END OF NODE HTTP CLIENT-------------------------------------------
 app.set('views', path.join(__dirname, 'views'));
 //set the view engine that will render HTML from the server to the client
 app.engine('.html', require('ejs').renderFile);
@@ -36,6 +43,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 var userRoutes = require('./routes/UserRoutes');
+var SpotifyRoutes = require('./routes/SpotifyRoutes');
+var GoogleMapsRoutes = require('./routes/GoogleMapsRoutes');
 
 //on homepage load, render the index page
 app.get('/', function(req, res) {
@@ -43,6 +52,8 @@ app.get('/', function(req, res) {
 });
 
 app.use("/api/v1/users", userRoutes);
+app.use("/api/v1/spotify", SpotifyRoutes);
+app.use("/api/v1/google-maps", GoogleMapsRoutes);
 
 
 var server = app.listen(port, function() {

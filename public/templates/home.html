@@ -1,5 +1,9 @@
 
 	<h1>{{home.title}}</h1>
 
-	<md-button class="md-primary md-raised" ng-click="home.registerStart()">Register</md-button>
-	<md-button class="md-accent md-raised" ng-click="home.loginStart()">Login</md-button>
+	<md-button ng-hide="home.user" class="md-primary md-raised" ng-click="home.registerStart()">Register</md-button>
+	<md-button ng-hide="home.user" class="md-accent md-raised" ng-click="home.loginStart()">Login</md-button>
+	<md-button ng-show="home.user" class="md-accent md-raised" ng-click="home.logout()">Logout</md-button>
+	<div ng-controller="SpotifyController as SpotC">
+		<md-button ng-hide="home.user" class="spotify-colored md-raised" ng-click="SpotC.login()">Login with Spotify</md-button>
+	</div>

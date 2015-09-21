@@ -19,9 +19,9 @@ passport.use(new LocalStrategy(function(username, password, done) {
         err: "Server has issues."
       });
       if (!user) return done({
-        err: "Couple does not exist"
+        err: "User does not exist"
       });
-      if(!user.checkPassword(password, user.saltRef.salt)) return done({err: "Invalid couplename and password combination."});
+      if(!user.checkPassword(password, user.saltRef.salt)) return done({err: "Invalid username and password combination."});
       return done(null, user);
     });
 }));
