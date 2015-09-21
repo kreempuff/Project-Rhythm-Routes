@@ -25,7 +25,6 @@
 
     //REGISTER A USER---------------------------------------------------------------
     o.registerUser = function(user) {
-			console.log(user);
       var q = $q.defer();
       $http.post("/api/v1/users/register", user)
         .success(function(res) {

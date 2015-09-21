@@ -14,7 +14,7 @@ require('./config/passport');
 
 //connection
 
-var dbUri = process.env.MONGO_LAB_URI || 'mongodb://localhost/Rhythm_Routes';
+var dbUri = process.env.MONGOLAB_URI || 'mongodb://localhost/Rhythm_Routes';
 mongoose.connect(dbUri, function (err, result) {
 	if(err) console.log("Error Connecting to database: " + dbUri + ". Error: " + err);
 	else console.log("Succesful connection to: " + dbUri);
