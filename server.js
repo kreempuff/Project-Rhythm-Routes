@@ -5,7 +5,7 @@ var bodyParser = require('body-parser');
 var app = express();
 var port = process.env.PORT || 3000;
 var mongoose = require('mongoose');
-// var passport = require('passport'); //passport below mongoose
+var passport = require('passport'); //passport below mongoose
 //Models
 require('./models/User');
 require('./models/Salts');
@@ -44,6 +44,23 @@ app.set('view options', {
 //middleware that allows for us to parse JSON and UTF-8 from the body of an HTTP request
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.serializeUser(function(user, done) {
+    done(null, user._id);
+    // if you use Model.id as your idAttribute maybe you'd want
+    // done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
+
+
 
 var userRoutes = require('./routes/UserRoutes');
 var SpotifyRoutes = require('./routes/SpotifyRoutes');

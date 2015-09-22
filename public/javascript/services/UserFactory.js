@@ -88,6 +88,7 @@
       return q.promise;
     }
 
+  
     //LOGOUT A USER-------------------------------------------------------------------
 
     o.logout = function() {

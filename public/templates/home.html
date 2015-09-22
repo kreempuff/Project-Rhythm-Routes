@@ -1,9 +1,14 @@
+<h1>{{home.title}}</h1>
 
-	<h1>{{home.title}}</h1>
-
-	<md-button ng-hide="home.user" class="md-primary md-raised" ng-click="home.registerStart()">Register</md-button>
-	<md-button ng-hide="home.user" class="md-accent md-raised" ng-click="home.loginStart()">Login</md-button>
-	<md-button ng-show="home.user" class="md-accent md-raised" ng-click="home.logout()">Logout</md-button>
-	<div ng-controller="SpotifyController as SpotC">
-		<md-button ng-hide="home.user" class="spotify-colored md-raised" ng-click="SpotC.login()">Login with Spotify</md-button>
-	</div>
+<md-button ng-hide="home.user" class="md-primary md-raised" ng-click="home.registerStart()">Register</md-button>
+<a ui-sref="Profile">
+	<md-button ng-show="home.user" class="md-primary md-raised">My Profile</md-button>
+</a>
+<md-button ng-hide="home.user" class="md-accent md-raised" ng-click="home.loginStart()">Login</md-button>
+<md-button ng-show="home.user" class="md-accent md-raised" ng-click="home.logout()">Logout</md-button>
+<div ng-controller="SpotifyController as SpotC">
+	<!-- ng-click="SpotC.login()" -->
+	<a href="/api/v1/spotify/login">
+		<md-button ng-hide="home.user" class="spotify-colored md-raised">Login with Spotify</md-button>
+	</a>
+</div>

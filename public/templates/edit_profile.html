@@ -29,5 +29,5 @@
   <label>Confirm Password</label>
   <input type='password' ng-model="registerModal.user.confirmPass">
 </md-input-container>
-<md-button class="md-raised md-primary" ng-click='registerModal.ok()'>Register</md-button>
+<md-button class="md-raised md-primary" ng-click='registerModal.ok()'>{{registerModal.submitAction}}</md-button>
 <md-button class="md-raised md-accent" ng-click='registerModal.cancel()'>Cancel</md-button>

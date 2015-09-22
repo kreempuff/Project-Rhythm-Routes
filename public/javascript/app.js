@@ -17,6 +17,14 @@
       templateUrl: 'templates/home.html',
       controller: "HomeController",
       controllerAs: "home"
+    }).state("Error", {
+      url: "/error",
+      templateUrl:"templates/error.html"
+    }).state("Profile", {
+      url: "/profile",
+      templateUrl:"templates/profile.html",
+      controller: "HomeController",
+      controllerAs: "profile"
     });
     $urlRouterProvider.otherwise('/');
   }

@@ -94,7 +94,35 @@ router.post('/register', function(req, res) {
 });
 
 
+router.post("/editProfileStart", function(req, res) {
+  User.findOne({
+    _id: req.body._id
+  }, function(err, user) {
+    if (err) return res.status(500).send({
+      err: "Server goofed."
+    });
+    if (!user) return res.status(400).send({
+      err: "I'm sorry but your profile doesn't exist"
+    })
+    res.send(user);
+  })
+})
 
+
+router.post("/editProfileFinish", function(req, res) {
+  console.log(req.body);
+  User.update({
+    _id: req.body._id
+  },req.body, function(err, user) {
+    if (err) return res.status(500).send({
+      err: "Server goofed."
+    });
+    if (!user) return res.status(400).send({
+      err: "I'm sorry but your profile doesn't exist"
+    })
+    res.send();
+  })
+})
 
 
 

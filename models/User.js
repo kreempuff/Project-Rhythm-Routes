@@ -1,9 +1,10 @@
 var mongoose = require('mongoose');
 var crypto = require('crypto');
 var jwt = require('jsonwebtoken');
-
+var findOrCreate = require('mongoose-findorcreate');
 
 var UserSchema = new mongoose.Schema({
+  spotifyId: String,
   username: {type: String, lowercase: true, unique: true},
   firstname: {type: String},
   lastname: {type: String},
@@ -13,6 +14,11 @@ var UserSchema = new mongoose.Schema({
   dateJoined: Date,
   saltRef: {type: mongoose.Schema.Types.ObjectId, ref: "Salts"}
 })
+
+
+UserSchema.plugin(findOrCreate);
+
+
 
 UserSchema.methods.setPassword = function (password, salt) {
   //this.salt needs to be set and retrieved in the create user route to create user password

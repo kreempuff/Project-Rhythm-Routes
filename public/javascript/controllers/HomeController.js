@@ -53,6 +53,7 @@
         controllerAs: "registerModal",
         controller: ["$modalInstance", "UserFactory", function($modalInstance, UF) {
           var registerModal = this;
+          registerModal.submitAction = "Submit Edit";
 
           registerModal.ok = function() {
             UF.registerUser(registerModal.user).then(function(res) {
@@ -71,11 +72,42 @@
     }
 
     //END of Register Modal!!---------------------------------------------------------------------
+    //Logout initiated---------------------------------------------------------------------
     home.logout = function() {
       UF.logout();
       home.user = $rootScope._user
     }
 
+    //Edit Profile Modal----------------------------------------------------------------------------------------------------------------
 
+    home.startEdit = function() {
+      var editModal = modal.open({
+        templateUrl: "../../templates/edit_profile.html",
+        controller: ["$http", "$modalInstance", function($http, $modalInstance) {
+          var registerModal = this;
+          registerModal.submitAction = "Submit Edit";
+          $http.post("/api/v1/users/editProfileStart", {
+            _id: home.user.id
+          }).success(function(res) {
+            registerModal.user = res;
+          console.log(registerModal.user);
+          })
+          registerModal.ok = function() {
+            $http.post("/api/v1/users/editProfileFinish", registerModal.user).success(function(res) {
+              delete registerModal.user;
+              $modalInstance.close();
+            })
+          }
+
+          registerModal.cancel = function() {
+            delete registerModal.user;
+            $modalInstance.dismiss();
+          }
+
+        }],
+        controllerAs: "registerModal",
+        size: "md",
+      })
+    }
   }
 })();
