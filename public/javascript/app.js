@@ -30,7 +30,6 @@
       templateUrl: "templates/auth.html",
       controller: ["$stateParams", "SpotifyFactory","$state", "$timeout", "$rootScope", function ($sP, SF, $state, time) {
         SF.setTheTokens($sP.accessToken, $sP.refreshToken);
-        $http.get()
         $state.go("Home");
       }]
     });

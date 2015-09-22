@@ -59,6 +59,7 @@
           registerModal.ok = function() {
             UF.registerUser(registerModal.user).then(function(res) {
               delete registerModal.user;
+                home.loginStart();
               $modalInstance.close();
             })
           }
