@@ -3,7 +3,7 @@
   angular.module('app')
     .factory('UserFactory', UserFactory);
 
-  UserFactory.$inject = ['$http', '$q', "$rootScope", "$window" ];
+  UserFactory.$inject = ['$http', '$q', "$rootScope", "$window"];
 
   function UserFactory($http, $q, $rootScope, $window) {
     var o = {};
@@ -88,15 +88,29 @@
       return q.promise;
     }
 
-  
+
     //LOGOUT A USER-------------------------------------------------------------------
 
     o.logout = function() {
-        removeToken();
-        $rootScope._user = isLoggedIn();
-      }
+      removeToken();
+      $rootScope._user = isLoggedIn();
+    }
 
-//------------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
+o.delete = function () {
+  var q = $q.defer();
+  $http.post("/api/v1/users/delete", {_id: $rootScope._user.id})
+    .success(function(res) {
+      $rootScope._user = isLoggedIn();
+      q.resolve();
+    })
+    .error(function(res) {
+      q.reject();
+    })
+  return q.promise;
+}
+
+    //------------------------------------------------------------------------------------------
 
     return o;
   }

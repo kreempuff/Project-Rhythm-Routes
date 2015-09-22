@@ -3,11 +3,12 @@
   angular.module('app')
     .controller('HomeController', HomeController);
 
-  HomeController.$inject = ["$modal", "$rootScope", "UserFactory"];
+  HomeController.$inject = ["$modal", "$rootScope", "UserFactory", "$state"];
 
-  function HomeController(modal, $rootScope, UF) {
+  function HomeController(modal, $rootScope, UF, $state) {
     var home = this;
     home.title = 'Welcome to Rhythm Routes!';
+    home.description = "This app in its final form will allow a user, to connect with their Spotify account and automatically produce theme music on the go."
     home.loginTitle = "Login";
     home.registerTitle = "Register!";
     home.user = $rootScope._user;
@@ -85,12 +86,13 @@
         templateUrl: "../../templates/edit_profile.html",
         controller: ["$http", "$modalInstance", function($http, $modalInstance) {
           var registerModal = this;
+          registerModal.editing = true;
           registerModal.submitAction = "Submit Edit";
           $http.post("/api/v1/users/editProfileStart", {
             _id: home.user.id
           }).success(function(res) {
             registerModal.user = res;
-          console.log(registerModal.user);
+            console.log(registerModal.user);
           })
           registerModal.ok = function() {
             $http.post("/api/v1/users/editProfileFinish", registerModal.user).success(function(res) {
@@ -108,6 +110,14 @@
         controllerAs: "registerModal",
         size: "md",
       })
+    }
+
+    //End of edit Modal--------------------------------------------------------------------------------------------------------
+    //delete Modal---------------------------------------------------------------------------------------------------
+    home.delete = function() {
+      UF.delete().then(function(res) {
+        $state.go("Home");
+      });
     }
   }
 })();

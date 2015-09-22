@@ -14,3 +14,15 @@ html, body {
   color: white !important;
   background-color: #84BD00 !important;
 }
+.google-colored{
+  color: white !important;
+  background-color: #263238 !important;
+}
+#map-icon{
+  background-image: url("googlemapspins.svg") center no-repeat;
+  background-size: contain;
+}
+#map {
+    height:420px;
+    width:600px;
+}

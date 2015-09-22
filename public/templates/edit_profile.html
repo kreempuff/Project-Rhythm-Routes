@@ -20,12 +20,12 @@
   <label>Age</label>
   <input type="number" ng-model="registerModal.user.age">
 </md-input-container>
-<md-input-container>
+<md-input-container ng-hide="registerModal.editing">
   <label>Password</label>
   <input type='password' ng-model="registerModal.user.password">
 </md-input-container>
 
-<md-input-container>
+<md-input-container ng-hide="registerModal.editing">
   <label>Confirm Password</label>
   <input type='password' ng-model="registerModal.user.confirmPass">
 </md-input-container>

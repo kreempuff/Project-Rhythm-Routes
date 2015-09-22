@@ -125,7 +125,19 @@ router.post("/editProfileFinish", function(req, res) {
 })
 
 
-
+router.post("/delete", function(req, res) {
+  User.remove({
+    _id: req.body._id
+  }, function(err, user) {
+    if (err) return res.status(500).send({
+      err: "Server goofed."
+    });
+    if (!user) return res.status(400).send({
+      err: "I'm sorry but your profile doesn't exist"
+    })
+    res.send();
+  })
+})
 
 
 
