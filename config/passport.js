@@ -5,6 +5,20 @@ var SpotifyStrategy = require('passport-spotify').Strategy;
 var User = mongoose.model('User');
 var Salts = mongoose.model('Salts');
 
+
+
+passport.serializeUser(function(user, done) {
+    done(null, user._id);
+    // if you use Model.id as your idAttribute maybe you'd want
+    // done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
+
 passport.use(new LocalStrategy(function(username, password, done) {
   User.findOne({
       username: username
@@ -36,9 +50,10 @@ SPOTclientSecret = process.env.SPOTIFY_CLIENT_SECRET || "43576c30460c499a8e2fa00
 passport.use(new SpotifyStrategy({
     clientID: SPOTclientID,
     clientSecret: SPOTclientSecret,
-    callbackURL: redirect_uri
+    callbackURL: redirect_uri,
+    passReqToCallback: true,
   },
-  function(accessToken, refreshToken, profile, done) {
+  function(req, accessToken, refreshToken, profile, done) {
     User.findOrCreate({
       spotifyId: profile.id
     }, {
@@ -46,7 +61,7 @@ passport.use(new SpotifyStrategy({
       spotifyId: profile.id,
       email: profile.emails[0].value
     }, function(err, user) {
-
+      req.token = {userAccessToken: accessToken, userRefreshToken: refreshToken}
       return done(err, user);
 
     });

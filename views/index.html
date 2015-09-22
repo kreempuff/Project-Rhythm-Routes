@@ -28,9 +28,12 @@
 
 
 
-	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUH7neg5-7nFM02tlPFQgw_IN8n9D3QMY&callback=initMap">
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUH7neg5-7nFM02tlPFQgw_IN8n9D3QMY&callback=doNothin">
 	</script>
 	<script type="text/javascript">
+	function doNothin() {
+		console.log('callback');
+	}
 		function initMap() {
 			var map = new google.maps.Map(document.getElementById('map'), {
 				center: {
@@ -87,9 +90,9 @@
 	<script src="/javascript/services/SpotifyFactory.js"></script>
 	<script src="/javascript/services/GoogleFactory.js"></script>
 	<!-- Controllers -->
-	<script src="/javascript/controllers/HomeController.js"></script>
 	<script src="/javascript/controllers/SpotifyController.js"></script>
 	<script src="/javascript/controllers/GoogleMapController.js"></script>
+	<script src="/javascript/controllers/HomeController.js"></script>
 </body>
 
 </html>

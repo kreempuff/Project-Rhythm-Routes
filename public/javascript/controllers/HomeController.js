@@ -11,7 +11,7 @@
     home.description = "This app in its final form will allow a user, to connect with their Spotify account and automatically produce theme music on the go."
     home.loginTitle = "Login";
     home.registerTitle = "Register!";
-    home.user = $rootScope._user;
+    home.user = $rootScope._user || $rootScope._spotifyUser;
     //LOGIN MODAL-----------------------------------------------------
     home.loginStart = function() {
         var loginInstance = modal.open({
@@ -92,7 +92,6 @@
             _id: home.user.id
           }).success(function(res) {
             registerModal.user = res;
-            console.log(registerModal.user);
           })
           registerModal.ok = function() {
             $http.post("/api/v1/users/editProfileFinish", registerModal.user).success(function(res) {

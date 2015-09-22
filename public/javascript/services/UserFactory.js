@@ -7,8 +7,12 @@
 
   function UserFactory($http, $q, $rootScope, $window) {
     var o = {};
-    $rootScope._user = isLoggedIn();
 
+    if(localStorage['spotify-acTokens']){
+      $rootScope._spotifyUser = true;
+    } else {
+      $rootScope._user = isLoggedIn();
+    }
     //TOKEN HANDLING----------------------------------------
     function setToken(token) {
       localStorage.setItem("token", token);
@@ -16,6 +20,9 @@
 
     function removeToken() {
       localStorage.removeItem("token");
+      localStorage.removeItem("spotify-acTokens");
+      localStorage.removeItem("spotify-refTokens");
+
     }
 
     function getToken() {

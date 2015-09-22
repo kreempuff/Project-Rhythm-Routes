@@ -2,15 +2,15 @@
 	<h1>{{home.title}}</h1>
 	<h3>{{home.description}}</h3>
 
-	<md-button ng-hide="home.user" class="md-primary md-raised" ng-click="home.registerStart()">Register</md-button>
+	<md-button ng-hide="home.user || home.spotifyUser" class="md-primary md-raised" ng-click="home.registerStart()">Register</md-button>
 	<a ui-sref="Profile">
-		<md-button ng-show="home.user" class="md-primary md-raised">My Profile</md-button>
+		<md-button ng-show="home.user || home.spotifyUser" class="md-primary md-raised">My Profile</md-button>
 	</a>
-	<md-button ng-hide="home.user" class="md-accent md-raised" ng-click="home.loginStart()">Login</md-button>
-	<md-button ng-show="home.user" class="md-accent md-raised" ng-click="home.logout()">Logout</md-button>
+	<md-button ng-hide="home.user || home.spotifyUser" class="md-accent md-raised" ng-click="home.loginStart()">Login</md-button>
+	<md-button ng-show="home.user || home.spotifyUser" class="md-accent md-raised" ng-click="home.logout()">Logout</md-button>
 	<div ng-controller="SpotifyController as SpotC">
 		<a href="/api/v1/spotify/login">
-			<md-button ng-hide="home.user" class="spotify-colored md-raised">Login with Spotify</md-button>
+			<md-button ng-hide="home.user || home.spotifyUser" class="spotify-colored md-raised">Login with Spotify</md-button>
 		</a>
 	</div>
 	<div ng-controller="GoogleController as GoogleC">
@@ -18,6 +18,6 @@
 			Find your Location</md-button>
 		<div id="map"></div>
 
-		
+
 	</div>
 </div>
