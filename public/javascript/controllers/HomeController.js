@@ -53,7 +53,7 @@
         controllerAs: "registerModal",
         controller: ["$modalInstance", "UserFactory", function($modalInstance, UF) {
           var registerModal = this;
-          registerModal.submitAction = "Submit Edit";
+          registerModal.submitAction = "Finish Register";
 
           registerModal.ok = function() {
             UF.registerUser(registerModal.user).then(function(res) {
