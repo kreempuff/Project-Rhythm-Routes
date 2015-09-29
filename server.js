@@ -54,6 +54,7 @@ app.use(passport.session());
 
 var userRoutes = require('./routes/UserRoutes');
 var SpotifyRoutes = require('./routes/SpotifyRoutes');
+var SpotifyDataRoutes = require('./routes/SpotifyDataRoutes');
 var GoogleMapsRoutes = require('./routes/GoogleMapsRoutes');
 
 //on homepage load, render the index page
@@ -63,6 +64,7 @@ app.get('/', function(req, res) {
 
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/spotify", SpotifyRoutes);
+app.use("/api/v1/spotifydata", SpotifyDataRoutes);
 app.use("/api/v1/google-maps", GoogleMapsRoutes);
 
 

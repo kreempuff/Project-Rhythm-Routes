@@ -2,7 +2,15 @@
   'use strict';
   angular.module('app', ['ui.router', "ngMaterial", "ui.bootstrap"])
     .config(StateConfig)
-    .config(ColorScheme);
+    .config(ColorScheme)
+    .config(function($sceDelegateProvider) {
+      $sceDelegateProvider.resourceUrlWhitelist([
+        // Allow same origin resource loads.
+        'self',
+        // Allow loading from our assets domain.  Notice the difference between * and **.
+        'https://p.scdn.co/mp3-preview/**'
+      ]);
+    });
   StateConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
 
   function ColorScheme($mdThemingProvider) {
@@ -19,16 +27,16 @@
       controllerAs: "home"
     }).state("Error", {
       url: "/error",
-      templateUrl:"templates/error.html"
+      templateUrl: "templates/error.html"
     }).state("Profile", {
       url: "/profile",
-      templateUrl:"templates/profile.html",
+      templateUrl: "templates/profile.html",
       controller: "HomeController",
       controllerAs: "profile"
     }).state("SpotifyToken", {
       url: "/token/:accessToken/:refreshToken/:id",
       templateUrl: "templates/auth.html",
-      controller: ["$stateParams", "SpotifyFactory","$state", "$timeout", "$rootScope", function ($sP, SF, $state, time) {
+      controller: ["$stateParams", "SpotifyFactory", "$state", "$timeout", "$rootScope", function($sP, SF, $state, time) {
         SF.setTheTokens($sP.accessToken, $sP.refreshToken);
         $state.go("Home");
       }]
